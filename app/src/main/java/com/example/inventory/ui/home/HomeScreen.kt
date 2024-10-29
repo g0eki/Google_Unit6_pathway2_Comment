@@ -16,6 +16,7 @@
 
 package com.example.inventory.ui.home
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -59,6 +60,7 @@ import com.example.inventory.InventoryTopAppBar
 import com.example.inventory.R
 import com.example.inventory.data.Item
 import com.example.inventory.ui.AppViewModelProvider
+import com.example.inventory.ui.item.ItemEntryDestination
 import com.example.inventory.ui.item.formatedPrice
 import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.InventoryTheme
@@ -79,13 +81,28 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    /*
+    viewModel ist HomeViewModel (viewModel Prinzip)
+    toDO: Im Buch nochmal lesen & auf der WebSeite
+     */
+
     val homeUiState by viewModel.homeUiState.collectAsState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    /* Scroll nach unten wird es verschwinden, Scroll nach oben kommt es wieder: der TopBar
+    */
+    // val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    /*
+    Erst wenn du wieder oben, werde ich mich dir zeigen du BITCH
+     */
+    // val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    /* TopBar bleibt immer sichtbar */
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
+            // Eine selbst erstelle Funkction
             InventoryTopAppBar(
+                // Headline / Titel: Inventory
                 title = stringResource(HomeDestination.titleRes),
                 canNavigateBack = false,
                 scrollBehavior = scrollBehavior
@@ -157,6 +174,8 @@ private fun InventoryList(
         modifier = modifier,
         contentPadding = contentPadding
     ) {
+        // toDO: next HERE HERE hier!
+        // toDO: Erstelle dir eine verdammte Skizze einfach !
         items(items = itemList, key = { it.id }) { item ->
             InventoryItem(item = item,
                 modifier = Modifier

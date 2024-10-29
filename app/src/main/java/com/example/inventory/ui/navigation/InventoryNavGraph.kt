@@ -16,6 +16,7 @@
 
 package com.example.inventory.ui.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -45,7 +46,38 @@ fun InventoryNavHost(
         startDestination = HomeDestination.route,
         modifier = modifier
     ) {
+        /* ##################################################################################
+        - Jeder dieser Screens hat ein Scaffold
+        ################################################################################## */
         composable(route = HomeDestination.route) {
+            /* ##################################################################################
+            Der Aufruf von navController.navigate(ItemEntryDestination.route) navigiert direkt zu
+            route => ItemEntryDestination.route, selbst wenn es in Log.i passiert
+
+            * navigateToItemEntry ==> FloatingActionButton (onClick) ==> ItemEntryScreen
+
+            * navigateToItemUpdate ==> Scaffold { HomeBody (onItemClick ==> navigateToItemUpdate)
+                                                  ==> Column Default oder InventoryList
+
+            ################################################################################## */
+
+            // toDO: dises Werte nochmal verinnerlichen
+            Log.i("INFO", "#### HomeDestination.route ####")
+            Log.i("INFO", "#### -------------------------- ####")
+            Log.i("INFO", "#### navigateToItemEntry ####")
+            Log.i("INFO", "#### ItemEntryDestination.route ####")
+            Log.i("INFO", "==>  ${ItemEntryDestination.route}")
+            Log.i("INFO", "#### -------------------------- ####")
+            Log.i("INFO", "#### -------------------------- ####")
+            Log.i("INFO", "#### navigateToItemUpdate ####")
+            Log.i("INFO", "#### ItemDetailsDestination.route ####")
+            Log.i("INFO", "==>  ${ItemDetailsDestination.route}")
+            Log.i("INFO", "#### it ####")
+            Log.i("INFO", "==>  ${it.toString()}")
+
+            // ToDO: Allgemein dieses "it" in composable() verstehen !?
+            // ToDO: Allgemein dieses diese Screen übergene verstehen, wegen dieses it.arg.. !?
+
             HomeScreen(
                 navigateToItemEntry = { navController.navigate(ItemEntryDestination.route) },
                 navigateToItemUpdate = {
@@ -65,6 +97,35 @@ fun InventoryNavHost(
                 type = NavType.IntType
             })
         ) {
+            /* ##################################################################################
+
+            arguments = listOf(navArgument(ItemDetailsDestination.itemIdArg,
+                                           builder = {type = NavType.IntType})
+            ==> arguments = listOf(navArgument(ItemDetailsDestination.itemIdArg) {
+                type = NavType.IntType
+            }) - Die beiden Zeilen sind gleich.
+
+            * route      ==> it.destination.route // alternative zu it -> backStackEntry -> (lambda)
+
+            * arguments  ==> it.arguments
+              - Ein direkter Zugriff auf "ItemDetailsDestination.itemIdArg":
+                    ==> it.arguments?.getInt(ItemDetailsDestination.itemIdArg), getInt wegen "type"
+              Bsp.: {  backStackEntry ->
+                     val item = backStackEntry.arguments?.getString(..itemIdArg) ?: -9
+                     // -9, Könnte zu einen Fehler führen, da es ein Index ist, vom Item.
+                     // Das hier ist nur zum Verständis
+
+            Link:
+            - https://developer.android.com/reference/kotlin/android/os/Bundle
+            ----------------------------------------------------------------------------------
+            val temp  = it.arguments
+            temp?.keySet()?.forEach { key ->
+                Log.i("INFO", "- Key: $key, Value: ${temp.get(key)}")
+            }
+            Log.i("INFO", "#- Test = : ${temp?.getInt("itemId").toString()}")
+
+            ################################################################################## */
+            Log.i("INFO", "-----: ${ItemEditDestination.route}/${it}")
             ItemDetailsScreen(
                 navigateToEditItem = { navController.navigate("${ItemEditDestination.route}/$it") },
                 navigateBack = { navController.navigateUp() }

@@ -93,6 +93,10 @@ fun ItemDetailsScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
+                /*
+                navigateToEditItem is (Int) -> Unit
+                OnClick needs () -> Unit
+                 */
                 onClick = { navigateToEditItem(uiState.value.itemDetails.id) },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier
