@@ -85,15 +85,17 @@ fun HomeScreen(
     viewModel ist HomeViewModel (viewModel Prinzip)
     toDO: Im Buch nochmal lesen & auf der WebSeite
      */
-
     val homeUiState by viewModel.homeUiState.collectAsState()
+
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     /* Scroll nach unten wird es verschwinden, Scroll nach oben kommt es wieder: der TopBar
     */
+
     // val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     /*
     Erst wenn du wieder oben, werde ich mich dir zeigen du BITCH
      */
+
     // val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     /* TopBar bleibt immer sichtbar */
 
@@ -126,8 +128,8 @@ fun HomeScreen(
         },
     ) { innerPadding ->
         HomeBody(
-            itemList = homeUiState.itemList,
-            onItemClick = navigateToItemUpdate,
+            itemList = homeUiState.itemList,        // viewModel: toDO
+            onItemClick = navigateToItemUpdate,     // item_details/NavBack.. route=home
             modifier = modifier.fillMaxSize(),
             contentPadding = innerPadding,
         )
@@ -155,7 +157,7 @@ private fun HomeBody(
         } else {
             InventoryList(
                 itemList = itemList,
-                onItemClick = { onItemClick(it.id) },
+                onItemClick = { onItemClick(it.id) }, // navigateToItemUpdate = item_details/NavBack.. route=home
                 contentPadding = contentPadding,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
             )

@@ -63,26 +63,23 @@ fun InventoryNavHost(
 
             // toDO: dises Werte nochmal verinnerlichen
             Log.i("INFO", "#### HomeDestination.route ####")
-            Log.i("INFO", "#### -------------------------- ####")
-            Log.i("INFO", "#### navigateToItemEntry ####")
-            Log.i("INFO", "#### ItemEntryDestination.route ####")
             Log.i("INFO", "==>  ${ItemEntryDestination.route}")
-            Log.i("INFO", "#### -------------------------- ####")
-            Log.i("INFO", "#### -------------------------- ####")
-            Log.i("INFO", "#### navigateToItemUpdate ####")
-            Log.i("INFO", "#### ItemDetailsDestination.route ####")
+            // ==> item_entry
             Log.i("INFO", "==>  ${ItemDetailsDestination.route}")
-            Log.i("INFO", "#### it ####")
+            // ==> item_details
             Log.i("INFO", "==>  ${it.toString()}")
+            // ==> NavBackStackEntry(d9d788ba-3644-4ef5-88b8-92e5c9b5cf52) destination=Destination(0x78d845ec) route=home
+            Log.i("INFO","${ItemDetailsDestination.route}/${it}")
+            // ==> item_details/NavBackStackEntry(d9d788ba-3644-4ef5-88b8-92e5c9b5cf52) destination=Destination(0x78d845ec) route=home
 
             // ToDO: Allgemein dieses "it" in composable() verstehen !?
             // ToDO: Allgemein dieses diese Screen übergene verstehen, wegen dieses it.arg.. !?
 
             HomeScreen(
-                navigateToItemEntry = { navController.navigate(ItemEntryDestination.route) },
+                navigateToItemEntry = {
+                    navController.navigate(ItemEntryDestination.route) },
                 navigateToItemUpdate = {
-                    navController.navigate("${ItemDetailsDestination.route}/${it}")
-                }
+                    navController.navigate("${ItemDetailsDestination.route}/${it}") }
             )
         }
         composable(route = ItemEntryDestination.route) {
