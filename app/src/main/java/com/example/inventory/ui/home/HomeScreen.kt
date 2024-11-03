@@ -112,7 +112,7 @@ fun HomeScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = navigateToItemEntry,
+                onClick = navigateToItemEntry, //
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier
                     .padding(
@@ -155,7 +155,7 @@ private fun HomeBody(
                 modifier = Modifier.padding(contentPadding),
             )
         } else {
-            InventoryList(
+            InventoryList( // toDO: next HERE HERE hier!
                 itemList = itemList,
                 onItemClick = { onItemClick(it.id) }, // navigateToItemUpdate = item_details/NavBack.. route=home
                 contentPadding = contentPadding,

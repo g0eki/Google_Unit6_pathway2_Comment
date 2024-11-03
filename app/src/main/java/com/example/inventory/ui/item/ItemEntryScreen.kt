@@ -83,6 +83,7 @@ fun ItemEntryScreen(
                 // be cancelled - since the scope is bound to composition.
                 coroutineScope.launch {
                     viewModel.saveItem()
+                    // navigateBack()
                     navigateBack()
                 }
             },

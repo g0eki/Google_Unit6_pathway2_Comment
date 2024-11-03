@@ -83,7 +83,15 @@ fun InventoryNavHost(
             )
         }
         composable(route = ItemEntryDestination.route) {
+            Log.i("INFO", "#################################################################\nHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+            //val justPint_pop = navController.graph.route
+            //Log.i("INFO", justPint_pop)
+            //val justPint_navUp =  navController.previousBackStackEntry?.destination
+            //Log.i("INFO", justPint_navUp)
+            Log.i("INFO", "#################################################################\nHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+            //val test = ""
             ItemEntryScreen(
+                //navigateBack = { navController.popBackStack(route = ItemEditDestination.routeWithArgs, inclusive = true) },
                 navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() }
             )
